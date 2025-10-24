@@ -86,7 +86,7 @@ public class EVOwnerDAO {
         }
     }
 
-    public int updateEVOwner(EVOwner owner) {
+    public boolean updateEVOwner(EVOwner owner) {
         SQLiteDatabase db = null;
         try {
             db = dbHelper.getWritableDatabase();
@@ -97,6 +97,7 @@ public class EVOwnerDAO {
             values.put(DatabaseHelper.COLUMN_EMAIL, owner.getEmail());
             values.put(DatabaseHelper.COLUMN_PHONE, owner.getPhone());
             values.put(DatabaseHelper.COLUMN_ADDRESS, owner.getAddress());
+            values.put(DatabaseHelper.COLUMN_PASSWORD, owner.getPassword());
             values.put(DatabaseHelper.COLUMN_IS_ACTIVE, owner.isActive() ? 1 : 0);
 
             String whereClause = DatabaseHelper.COLUMN_NIC + " = ?";
@@ -104,14 +105,15 @@ public class EVOwnerDAO {
 
             int result = db.update(DatabaseHelper.TABLE_EV_OWNERS, values, whereClause, whereArgs);
             Log.d(TAG, "Updated EV Owner: " + owner.getNic() + ", rows affected: " + result);
-            return result;
+            return result > 0;
         } catch (Exception e) {
             Log.e(TAG, "Error updating EV Owner: " + e.getMessage(), e);
-            return 0;
+            return false;
         } finally {
             if (db != null) db.close();
         }
     }
+
 
     public int deleteEVOwner(String nic) {
         SQLiteDatabase db = null;

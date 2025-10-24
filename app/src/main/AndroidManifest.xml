@@ -34,6 +34,15 @@
             android:name=".activities.RegisterActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:exported="false" />
 
         <activity
             android:name=".activities.DashboardActivity"

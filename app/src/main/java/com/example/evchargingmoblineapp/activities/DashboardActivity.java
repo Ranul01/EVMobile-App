@@ -108,7 +108,14 @@ public class DashboardActivity extends AppCompatActivity {
             });
 
             cardProfile.setOnClickListener(v -> {
-                Toast.makeText(this, "Profile - Coming soon", Toast.LENGTH_SHORT).show();
+                try {
+                    Intent intent = new Intent(DashboardActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    Log.d(TAG, "Navigating to ProfileActivity");
+                } catch (Exception e) {
+                    Log.e(TAG, "Error navigating to ProfileActivity: " + e.getMessage(), e);
+                    Toast.makeText(this, "Unable to open profile", Toast.LENGTH_SHORT).show();
+                }
             });
 
             cardNearbyStations.setOnClickListener(v -> {
